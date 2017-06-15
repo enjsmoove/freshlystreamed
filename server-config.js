@@ -6,9 +6,7 @@ const jsonp = require('jsonp-fallback')
 const axios = require('axios')
 const app = express();
 const db= require('./db/db')
-console.log('right before requiring SSONGSCREMEAAAAAAA')
 const Song = require('./db/songSchema')
-console.log('right after requiring SSONGSCREMEAAAAAAA')
 const compiler = webpack(webpackConfig);
 const bodyParser = require('body-parser')
 var rp = require('request-promise');
@@ -37,7 +35,7 @@ app.get('/search/:query',function(req,res){
 
   rp(options)
     .then(response=>{
-      res.status(200).send(response)
+      res.send(response)
     }).catch(err=>{
       console.log(err)
     })
@@ -46,7 +44,7 @@ app.get('/songs',(req,res)=>{
   Song.find((err,songs)=>{
     if(err) return console.error(err)
     console.log(songs)
-    res.status(200).send(songs)
+    res.send(songs)
   })
 })
 app.delete('/songs',(req,res)=>{
@@ -59,14 +57,15 @@ app.delete('/song/:id',(req,res)=>{
   var id = req.params.id
   Song.deleteOne({id:id})
     .then(respond=>{
-      // console.log('delete?', respond)
-      Song.find({$where:'this.title.length>0'})
-        .then(respond=>{
-          console.log('get me something ',respond)
-        })
+      res.send(respond)
+      // Song.find({$where:'this.title.length>0'})
+      //   .then(respond=>{
+      //     console.log('get me something ',respond)
+      //   })
       // console.log(songs)
     }).catch(err=>{
       console.log('error deleting',err)
+      res.status(500).send(err)
     })
 })
 app.get('/song/:id',(req,res)=>{
@@ -79,13 +78,14 @@ app.get('/song/:id',(req,res)=>{
 
 })
 app.post('/add/',(req,res)=>{
+console.log('got song',req.body)
   // var song = new Song(req.body)
   var song = req.body
-  // song['id']=req.body.url
+  song['id']=req.body.url
   // console.log(song)
   Song.create(song,(err,song)=>{
-    if(err) return console.error(err)
-    res.status(200).send('got it', song)
+    if(err) return res.status(200).send(err)
+    res.status(200).send(song)
   })
 
 })
