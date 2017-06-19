@@ -1,33 +1,18 @@
-My Project
+Freshly Streamed
 ---
  
-Welcome.
+Welcome to Freshly Streamed. The super simple web crawler for mp3 files all over the Internet. Looking for your favorite song? That song you heard on your way to work. Well look no further. Hop on Freshly Streamed and get to downloading :) 
  
  
  
-Usage
+Getting Started
 ---
  
-Start the development server with this command:
- 
+1. 
 ```
 npm start
 ```
+Install the necessary dependencies
+
+2. Open localhost:8080 in your desired browser to get started!
  
- 
- 
-Setup
----
- 
-```
-npm install
-```
- 
- 
- 
-Compile
----
- 
-```
-npm run compile
-```
