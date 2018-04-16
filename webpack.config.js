@@ -1,7 +1,7 @@
 const path = require('path');
+const StartServerPlugin = require('start-server-webpack-plugin')
 
 module.exports = {
-  context: path.join(__dirname, 'components'),
   entry: [
     './main.js',
   ],
@@ -26,5 +26,9 @@ module.exports = {
       path.join(__dirname, 'node_modules'),
     ],
   },
+  plugins:[
+    new StartServerPlugin('bundle.js')
+
+  ],
   devtool: 'inline-source-map',
 };
