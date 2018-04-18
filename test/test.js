@@ -1,7 +1,8 @@
 var superagent = require('superagent')
-var chai = require('chai')
+var chai =require('chai')
 var port = 2009
 var expect = chai.expect;
+
 describe('homepage', function(){
   it('should respond to GET',function(){
     superagent
