@@ -1,5 +1,5 @@
 var superagent = require('superagent')
-var chai =require('chai ')
+var chai =require('chai')
 var port = 2009
 var expect = chai.expect;
 
