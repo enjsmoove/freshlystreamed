@@ -50,24 +50,25 @@ class App extends React.Component {
   updateDownloadLinks(){
     var songs = []
     // adding id key to songs to keep track
-    // this.state.addedData.forEach((song,index,array)=>{
-    //   var e = song.id
-    //   var endpoint ='/song/'+e
-    //   axios.get(endpoint)
-    //   .then(res=>{
-    //     var updatedSong = res.data.song
-    //     updatedSong['id']= song.id
-    //     songs.push(updatedSong)
-    //   }).then(res=>{
-    //     //set state after pushed new songs
-    //     if(index === array.length-1){
-    //       console.log('done uploading')
-    //       console.log(this.state.addedData)
-    //       this.setState({addedData:songs})
-    //       console.log(this.state.addedData)
-    //     }
-    //   })
-    // })
+    this.state.addedData.forEach((song,index,array)=>{
+      var e = song.id
+      var endpoint ='/download/'+e
+      axios.get(endpoint)
+      .then(res=>{
+        var updatedSong = res.data.song
+        updatedSong['id']= song.id
+        songs.push(updatedSong)
+        // console.log(songs)
+      // }).then(res=>{
+      //   //set state after pushed new songs
+      //   if(index === array.length-1){
+      //     console.log('done uploading')
+      //     console.log(this.state.addedData)
+          this.setState({addedData:songs},()=> console.log('done uploading'))
+          console.log(this.state.addedData)
+        // }
+      })
+    })
   }
   componentWillMount(){
     // this.clearAllSongs()
@@ -214,7 +215,7 @@ handleChange(event, { newValue }){
     return (
       <div>
       <Navbar inverse collapseOnSelect><Navbar.Brand>
-        <a href="#">Freshly Stream d</a>
+        <a href="#">Freshly Streamed</a>
       </Navbar.Brand> </Navbar>
       <Grid>
        <Row className="show-grid">

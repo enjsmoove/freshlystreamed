@@ -93,6 +93,30 @@ app.get('/song/:id',(req,res)=>{
     })
 
 })
+
+app.get('/download/:id',(req,res)=>{
+  var id = req.params.id
+  var endpoint = "https://databrainz.com/api/data_api_new.cgi?jsoncallback=jQuery1111007132583396840264_1549797759494&id="+id+"&r=new&format=json&_=1549797759498"
+  var options = {
+    uri: endpoint,
+    headers: {
+        'User-Agent': 'Request-Promise'
+    },
+    json: true // Automatically parses the JSON string in the response
+  };
+
+  rp(options)
+    .then(response=>{
+      if(!response){
+        return res.send([])
+      }
+      response = response.substring(43,response.length-1)
+      console.log('['+response+']')
+      res.send(response)
+      // console.log(err)
+    })
+
+})
 app.post('/add/',(req,res)=>{
 console.log('got song',req.body)
   // var song = new Song(req.body)
